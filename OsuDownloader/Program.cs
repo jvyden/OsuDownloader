@@ -12,6 +12,7 @@ namespace OsuDownloader {
     public class Program {
         public static void Main() {
             string[] streams = {"Stable40", "Beta40", "cuttingedge", "lazer", "stable"};
+//            string[] streams = {"beta"};
 
             foreach(string stream in streams) {
                 Console.WriteLine("Downloading stream " + stream);
@@ -60,7 +61,7 @@ namespace OsuDownloader {
             }
             catch {
                 ErrorResponse errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(updateResponse);
-                if(errorResponse != null) Console.Error.WriteLine("Error from server: " + errorResponse.Response);
+                if(errorResponse != null) throw new ArgumentException(errorResponse.Response);
                 return null;
             }
 
